@@ -43,7 +43,7 @@ public class Carta {
 		case NUEVE:
 			valor = 9;
 			break;
-		case JOTA: case QUINA: case KA: 
+		case DIEZ: case JOTA: case QUINA: case KA: 
 			valor = 10;
 			break;
 		default:
