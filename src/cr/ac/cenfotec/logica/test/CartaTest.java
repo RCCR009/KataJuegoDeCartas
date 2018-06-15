@@ -19,8 +19,19 @@ public class CartaTest {
 	}
 
 	@Test
-	public void testVerificarDatosCarta() {
+	public void VerificarDatosCartatest() {
 		assertNotNull(carta = new Carta(NombreCarta.AS, Palo.ESCUDOS));		
+	}
+	
+	@Test
+	public void equalstest() {
+		carta = new Carta(NombreCarta.JOTA, Palo.ESCUDOS);
+		Carta carta2 = new Carta(NombreCarta.QUINA, Palo.GOTAS);
+		Carta carta3 = new Carta(NombreCarta.AS, Palo.ESCUDOS);
+		
+		assertEquals(true, carta.equals(carta2));
+		assertEquals(false, carta.equals(carta3));
+		
 	}
 
 }
