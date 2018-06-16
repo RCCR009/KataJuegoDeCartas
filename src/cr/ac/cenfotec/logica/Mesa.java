@@ -45,7 +45,7 @@ public class Mesa {
 		}
 	}
 	
-	public ArrayList<Jugador> GetGanador() throws Exception {
+	public ArrayList<Jugador> getGanador() throws Exception {
 		
 		if(this.repartidor.getNaipe().size() == 52) {
 			throw new Exception("No game");
@@ -68,8 +68,25 @@ public class Mesa {
 				}			
 			}
 			return ganadores;			
+		}		
+	}
+
+	public boolean verificarCambio(ArrayList<Carta> mano) {
+		int puntos = 0;
+		boolean cambio = false;
+		
+		for(Carta c:mano) {
+			if(c.getNombre() == NombreCarta.JOTA || c.getNombre() == NombreCarta.QUINA || 
+					c.getNombre() == NombreCarta.KA || c.getNombre() == NombreCarta.TRES) {
+				puntos += c.getValor();
+			}
 		}
 		
+		if(puntos == 13) {
+			cambio = true;
+		}
+		
+		return cambio;
 	}
 	
 	

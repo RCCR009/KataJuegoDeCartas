@@ -126,7 +126,7 @@ public class MesaTest {
 		j2.setMano(new Carta(NombreCarta.DOS,Palo.ESTRELLAS));
 		mesa.setJugadores(j2);
 		
-		assertEquals(j1,mesa.GetGanador().get(0));
+		assertEquals(j1,mesa.getGanador().get(0));
 	}
 	
 	@Test
@@ -159,7 +159,7 @@ public class MesaTest {
 		j3.setMano(new Carta(NombreCarta.DOS,Palo.GOTAS));
 		mesa.setJugadores(j3);
 		
-		assertEquals(ganadores,mesa.GetGanador());
+		assertEquals(ganadores,mesa.getGanador());
 	}
 	
 	@Test(expected = Exception.class)
@@ -173,8 +173,32 @@ public class MesaTest {
 		Jugador j2 = new Jugador();
 		mesa.setJugadores(j2);
 		
-		assertEquals(j1,mesa.GetGanador());
+		assertEquals(j1,mesa.getGanador());	
+	}
+	
+	@Test
+	public void verificarCambioTest() throws Exception {
+		Repartidor repartidor = new Repartidor();
 		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}	
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.TRES,Palo.ESTRELLAS));
+		mesa.setJugadores(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j2.setMano(new Carta(NombreCarta.JOTA,Palo.ESTRELLAS));
+		mesa.setJugadores(j2);
+		
+		assertEquals(true,mesa.verificarCambio(j1.getMano()));
+		assertEquals(false,mesa.verificarCambio(j2.getMano()));
 	}
  	
 }
