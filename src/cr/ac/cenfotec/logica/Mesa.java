@@ -109,10 +109,18 @@ public class Mesa {
 			for(Jugador j: jugadores) {
 				repartidor.darCarta(j);
 			}
-		}
-		
+		}	
 	}
 	
+	public void tomarCarta() {
+		ArrayList<Carta> deck = repartidor.getNaipe();
+		
+		for(Jugador j:jugadores) {
+			j.getMano().add(deck.get(0));
+			deck.remove(0);
+		}
+		repartidor.setNaipe(deck);
+	}
 	
 		
 }
