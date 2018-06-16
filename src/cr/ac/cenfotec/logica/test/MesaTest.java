@@ -358,5 +358,28 @@ public class MesaTest {
 		assertEquals(20, mesa.getRepartidor().getNaipe().size());
 		
 	}
+		
+	@Test
+	public void manotest() throws Exception {
+		Repartidor repartidor = new Repartidor();
+		mesa.setRepartidor(repartidor);
+		Jugador j1 = new Jugador();
+		mesa.setJugadores(j1);
+		Jugador j2 = new Jugador();
+		mesa.setJugadores(j2);
+		Jugador j3 = new Jugador();
+		mesa.setJugadores(j3);
+		Jugador j4 = new Jugador();
+		mesa.setJugadores(j4);
+		
+		mesa.empezarPartidaDeRon();
+		mesa.tomarCarta();
+		
+		assertEquals(7, mesa.getJugadores().get(0).getMano().size());
+		assertEquals(7, mesa.getJugadores().get(1).getMano().size());
+		assertEquals(7, mesa.getJugadores().get(2).getMano().size());
+		assertEquals(7, mesa.getJugadores().get(3).getMano().size());
+		
+	}
  	
 }
