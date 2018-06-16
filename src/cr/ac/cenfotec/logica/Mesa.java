@@ -113,19 +113,30 @@ public class Mesa {
 		}	
 	}
 	
-	public void tomarCarta() {
-		ArrayList<Carta> deck = repartidor.getNaipe();
-		Random randomGenerator = new Random();
-		int index;		
-		
-		for(Jugador j:jugadores) {
-			index = randomGenerator.nextInt(j.getMano().size());
-			j.getMano().remove(index);
-			j.getMano().add(deck.get(0));
-			deck.remove(0);
+	public void tomarCarta() throws Exception {
+		if(this.repartidor.getNaipe().size() == 52) {
+			throw new Exception("No game");
+		}else {
+			ArrayList<Carta> deck = repartidor.getNaipe();
+			Random randomGenerator = new Random();
+			int index;		
+			
+			for(Jugador j:jugadores) {
+				index = randomGenerator.nextInt(j.getMano().size());
+				j.getMano().remove(index);
+				j.getMano().add(deck.get(0));
+				deck.remove(0);
+			}
+			repartidor.setNaipe(deck);	
 		}
-		repartidor.setNaipe(deck);
 	}
+
+	public void resetGame() {
+		this.jugadores = new ArrayList<>();
+		this.repartidor = new Repartidor();
+	}
+	
+	
 	
 		
 }
