@@ -63,10 +63,19 @@ public class Mesa {
 			}
 			
 			for(int i = 0;i<jugadores.size();i++) {		
-				if(lpuntos.get(i) == Collections.max(lpuntos)) {
+				if(lpuntos.get(i) == 12) {
 					ganadores.add(jugadores.get(i));
 				}			
 			}
+			
+			if(ganadores.isEmpty()) {
+				for(int i = 0;i<jugadores.size();i++) {		
+					if(lpuntos.get(i) == Collections.max(lpuntos)) {
+						ganadores.add(jugadores.get(i));
+					}			
+				}				
+			}
+				
 			return ganadores;			
 		}		
 	}

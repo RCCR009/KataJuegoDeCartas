@@ -200,5 +200,64 @@ public class MesaTest {
 		assertEquals(true,mesa.verificarCambio(j1.getMano()));
 		assertEquals(false,mesa.verificarCambio(j2.getMano()));
 	}
+	
+	@Test
+	public void veintiunoMediotest() throws Exception {
+		Repartidor repartidor = new Repartidor();
+		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}	
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.DOS,Palo.ESTRELLAS));
+		mesa.setJugadores(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.JOTA,Palo.ESCUDOS));
+		j2.setMano(new Carta(NombreCarta.QUINA,Palo.ESTRELLAS));
+		mesa.setJugadores(j2);
+		
+		assertEquals(j1,mesa.getGanador().get(0));
+	}
+	
+	@Test
+	public void empateVeintiunoMedioContest() throws Exception {
+		Repartidor repartidor = new Repartidor();
+		ArrayList<Jugador> ganadores = new ArrayList<>();
+		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.DOS,Palo.ESTRELLAS));
+		mesa.setJugadores(j1);
+		ganadores.add(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.DIEZ,Palo.FLORES));
+		j2.setMano(new Carta(NombreCarta.DOS,Palo.GOTAS));
+		mesa.setJugadores(j2);
+		ganadores.add(j2);
+		
+		Jugador j3 = new Jugador();
+		j3.setNombre("Sander");
+		j3.setMano(new Carta(NombreCarta.QUINA,Palo.FLORES));
+		j3.setMano(new Carta(NombreCarta.KA,Palo.GOTAS));
+		mesa.setJugadores(j3);
+		
+		assertEquals(ganadores,mesa.getGanador());
+	}
+	
+	
  	
 }
