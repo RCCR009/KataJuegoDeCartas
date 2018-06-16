@@ -103,6 +103,15 @@ public class Mesa {
 		
 		return cambio;
 	}
+
+	public void empezarPartidaDeRon() {
+		for(int i = 0; i<7; i++) {
+			for(Jugador j: jugadores) {
+				repartidor.darCarta(j);
+			}
+		}
+		
+	}
 	
 	
 		
