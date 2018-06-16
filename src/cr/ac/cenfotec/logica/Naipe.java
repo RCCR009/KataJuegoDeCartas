@@ -25,7 +25,6 @@ public class Naipe {
 				deck.add(new Carta(n,p));
 			}
 		}
-		
 		Collections.shuffle(deck);	
 	}
 
