@@ -126,7 +126,7 @@ public class MesaTest {
 		j2.setMano(new Carta(NombreCarta.DOS,Palo.ESTRELLAS));
 		mesa.setJugadores(j2);
 		
-		assertEquals(j1,mesa.getGanador().get(0));
+		assertEquals(j1,mesa.getGanador(new Carta()).get(0));
 	}
 	
 	@Test
@@ -159,7 +159,7 @@ public class MesaTest {
 		j3.setMano(new Carta(NombreCarta.DOS,Palo.GOTAS));
 		mesa.setJugadores(j3);
 		
-		assertEquals(ganadores,mesa.getGanador());
+		assertEquals(ganadores,mesa.getGanador(new Carta()));
 	}
 	
 	@Test(expected = Exception.class)
@@ -173,7 +173,7 @@ public class MesaTest {
 		Jugador j2 = new Jugador();
 		mesa.setJugadores(j2);
 		
-		assertEquals(j1,mesa.getGanador());	
+		assertEquals(j1,mesa.getGanador(new Carta()));	
 	}
 	
 	@Test
@@ -222,7 +222,7 @@ public class MesaTest {
 		j2.setMano(new Carta(NombreCarta.QUINA,Palo.ESTRELLAS));
 		mesa.setJugadores(j2);
 		
-		assertEquals(j1,mesa.getGanador().get(0));
+		assertEquals(j1,mesa.getGanador(new Carta()).get(0));
 	}
 	
 	@Test
@@ -255,9 +255,66 @@ public class MesaTest {
 		j3.setMano(new Carta(NombreCarta.KA,Palo.GOTAS));
 		mesa.setJugadores(j3);
 		
-		assertEquals(ganadores,mesa.getGanador());
+		assertEquals(ganadores,mesa.getGanador(new Carta()));
 	}
 	
+	@Test
+	public void comodintest() throws Exception {
+		Carta comodin = new Carta(NombreCarta.AS, Palo.ESCUDOS);
+		Repartidor repartidor = new Repartidor();
+		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}	
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.DOS,Palo.ESTRELLAS));
+		mesa.setJugadores(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.AS, Palo.ESCUDOS));
+		j2.setMano(new Carta(NombreCarta.QUINA,Palo.ESTRELLAS));
+		mesa.setJugadores(j2);
+		
+		assertEquals(j2,mesa.getGanador(comodin).get(0));
+	}
 	
+	@Test
+	public void empateComodintest() throws Exception {
+		Carta comodin = new Carta(NombreCarta.AS, Palo.ESCUDOS);
+		Repartidor repartidor = new Repartidor();
+		ArrayList<Jugador> ganadores = new ArrayList<>();
+		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.AS, Palo.ESCUDOS));
+		mesa.setJugadores(j1);
+		ganadores.add(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.DIEZ,Palo.FLORES));
+		j2.setMano(new Carta(NombreCarta.DOS,Palo.GOTAS));
+		mesa.setJugadores(j2);
+		
+		Jugador j3 = new Jugador();
+		j3.setNombre("Sander");
+		j3.setMano(new Carta(NombreCarta.QUINA,Palo.FLORES));
+		j3.setMano(new Carta(NombreCarta.AS, Palo.ESCUDOS));
+		mesa.setJugadores(j3);
+		ganadores.add(j3);
+		
+		assertEquals(ganadores,mesa.getGanador(comodin));
+	}
  	
 }

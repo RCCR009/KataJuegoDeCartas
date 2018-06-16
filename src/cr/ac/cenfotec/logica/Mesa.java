@@ -45,7 +45,7 @@ public class Mesa {
 		}
 	}
 	
-	public ArrayList<Jugador> getGanador() throws Exception {
+	public ArrayList<Jugador> getGanador(Carta comodin) throws Exception {
 		
 		if(this.repartidor.getNaipe().size() == 52) {
 			throw new Exception("No game");
@@ -57,16 +57,22 @@ public class Mesa {
 			for(Jugador j:jugadores) {
 				puntosJugador = 0;
 				for(Carta c:j.getMano()) {
-					puntosJugador += c.getValor();			
+					puntosJugador += c.getValor();
+					
+					if(c.equals(comodin)) {
+						ganadores.add(j);
+					}	
 				}
 				lpuntos.add(puntosJugador);
-			}
+			}		
 			
-			for(int i = 0;i<jugadores.size();i++) {		
-				if(lpuntos.get(i) == 12) {
-					ganadores.add(jugadores.get(i));
-				}			
-			}
+			if(ganadores.isEmpty()) {
+				for(int i = 0;i<jugadores.size();i++) {		
+					if(lpuntos.get(i) == 12) {
+						ganadores.add(jugadores.get(i));
+					}			
+				}
+			}		
 			
 			if(ganadores.isEmpty()) {
 				for(int i = 0;i<jugadores.size();i++) {		
