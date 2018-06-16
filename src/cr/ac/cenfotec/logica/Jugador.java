@@ -9,6 +9,7 @@ public class Jugador {
 	
 	public Jugador() {
 		super();
+		mano = new ArrayList<>();
 	}
 		
 	public Jugador(String nombre, ArrayList<Carta> mano) {

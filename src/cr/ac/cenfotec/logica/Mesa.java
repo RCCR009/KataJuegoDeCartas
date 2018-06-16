@@ -34,10 +34,6 @@ public class Mesa {
 		}else {
 			throw new Exception("This game is only for 4 players");
 		}
-		
-		
 	}
-	
-	
 	
 }
