@@ -1,6 +1,7 @@
 package cr.ac.cenfotec.logica;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Mesa {
 	
@@ -44,4 +45,33 @@ public class Mesa {
 		}
 	}
 	
+	public ArrayList<Jugador> GetGanador() throws Exception {
+		
+		if(this.repartidor.getNaipe().size() == 52) {
+			throw new Exception("No game");
+		}else {
+			ArrayList<Integer> lpuntos = new ArrayList<>();
+			ArrayList<Jugador> ganadores = new ArrayList<>();
+			int puntosJugador;
+			
+			for(Jugador j:jugadores) {
+				puntosJugador = 0;
+				for(Carta c:j.getMano()) {
+					puntosJugador += c.getValor();			
+				}
+				lpuntos.add(puntosJugador);
+			}
+			
+			for(int i = 0;i<jugadores.size();i++) {		
+				if(lpuntos.get(i) == Collections.max(lpuntos)) {
+					ganadores.add(jugadores.get(i));
+				}			
+			}
+			return ganadores;			
+		}
+		
+	}
+	
+	
+		
 }

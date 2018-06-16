@@ -4,8 +4,12 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
+
+import cr.ac.cenfotec.logica.Carta;
 import cr.ac.cenfotec.logica.Jugador;
 import cr.ac.cenfotec.logica.Mesa;
+import cr.ac.cenfotec.logica.NombreCarta;
+import cr.ac.cenfotec.logica.Palo;
 import cr.ac.cenfotec.logica.Repartidor;
 
 public class MesaTest {
@@ -99,6 +103,78 @@ public class MesaTest {
 		assertEquals(2, j3.getMano().size());
 		assertEquals(2, j4.getMano().size());
 				
+	}
+	
+	@Test
+	public void Ganadortest() throws Exception {
+		Repartidor repartidor = new Repartidor();
+		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}	
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.JOTA,Palo.ESTRELLAS));
+		mesa.setJugadores(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.AS,Palo.ESCUDOS));
+		j2.setMano(new Carta(NombreCarta.DOS,Palo.ESTRELLAS));
+		mesa.setJugadores(j2);
+		
+		assertEquals(j1,mesa.GetGanador().get(0));
+	}
+	
+	@Test
+	public void Empatetest() throws Exception {
+		Repartidor repartidor = new Repartidor();
+		ArrayList<Jugador> ganadores = new ArrayList<>();
+		
+		for(int i = 0;i<4;i++) {
+			repartidor.getNaipe().remove(i);
+		}
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		j1.setNombre("Carlos");
+		j1.setMano(new Carta(NombreCarta.KA,Palo.ESCUDOS));
+		j1.setMano(new Carta(NombreCarta.JOTA,Palo.ESTRELLAS));
+		mesa.setJugadores(j1);
+		ganadores.add(j1);
+		
+		Jugador j2 = new Jugador();
+		j2.setNombre("Miguel");
+		j2.setMano(new Carta(NombreCarta.DIEZ,Palo.FLORES));
+		j2.setMano(new Carta(NombreCarta.QUINA,Palo.GOTAS));
+		mesa.setJugadores(j2);
+		ganadores.add(j2);
+		
+		Jugador j3 = new Jugador();
+		j3.setNombre("Sander");
+		j3.setMano(new Carta(NombreCarta.CUATRO,Palo.FLORES));
+		j3.setMano(new Carta(NombreCarta.DOS,Palo.GOTAS));
+		mesa.setJugadores(j3);
+		
+		assertEquals(ganadores,mesa.GetGanador());
+	}
+	
+	@Test(expected = Exception.class)
+	public void noStartGameException() throws Exception {
+		Repartidor repartidor = new Repartidor();	
+		mesa.setRepartidor(repartidor);
+		
+		Jugador j1 = new Jugador();
+		mesa.setJugadores(j1);
+		
+		Jugador j2 = new Jugador();
+		mesa.setJugadores(j2);
+		
+		assertEquals(j1,mesa.GetGanador());
+		
 	}
  	
 }
