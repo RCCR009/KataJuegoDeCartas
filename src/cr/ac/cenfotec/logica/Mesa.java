@@ -67,24 +67,31 @@ public class Mesa {
 				lpuntos.add(puntosJugador);
 			}		
 			
-			if(ganadores.isEmpty()) {
-				for(int i = 0;i<jugadores.size();i++) {		
-					if(lpuntos.get(i) == 12) {
-						ganadores.add(jugadores.get(i));
-					}			
-				}
-			}		
-			
-			if(ganadores.isEmpty()) {
-				for(int i = 0;i<jugadores.size();i++) {		
-					if(lpuntos.get(i) == Collections.max(lpuntos)) {
-						ganadores.add(jugadores.get(i));
-					}			
-				}				
-			}
+			winWith12(lpuntos, ganadores);				
+			morePointsToWin(lpuntos, ganadores);
 				
 			return ganadores;			
 		}		
+	}
+
+	private void winWith12(ArrayList<Integer> lpuntos, ArrayList<Jugador> ganadores) {
+		if(ganadores.isEmpty()) {
+			for(int i = 0;i<jugadores.size();i++) {		
+				if(lpuntos.get(i) == 12) {
+					ganadores.add(jugadores.get(i));
+				}			
+			}
+		}
+	}
+	
+	private void morePointsToWin(ArrayList<Integer> lpuntos, ArrayList<Jugador> ganadores) {
+		if(ganadores.isEmpty()) {
+			for(int i = 0;i<jugadores.size();i++) {		
+				if(lpuntos.get(i) == Collections.max(lpuntos)) {
+					ganadores.add(jugadores.get(i));
+				}			
+			}				
+		}
 	}
 
 	public boolean verificarCambio(ArrayList<Carta> mano) {
@@ -135,8 +142,5 @@ public class Mesa {
 		this.jugadores = new ArrayList<>();
 		this.repartidor = new Repartidor();
 	}
-	
-	
-	
 		
 }

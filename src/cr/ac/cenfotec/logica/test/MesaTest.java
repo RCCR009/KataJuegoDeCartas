@@ -425,11 +425,6 @@ public class MesaTest {
 		
 		assertEquals(0, mesa.getJugadores().size());
 		assertEquals(52, mesa.getRepartidor().getNaipe().size());
-	}
-	
-	
-	
-	
-	
+	}	
 	
 }
