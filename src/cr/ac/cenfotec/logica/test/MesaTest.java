@@ -50,7 +50,7 @@ public class MesaTest {
 	}
 	
 	@Test(expected = Exception.class)
-	public void more4PlayerTest() throws Exception {		
+	public void more4PlayersTest() throws Exception {		
 		Jugador j1 = new Jugador();
 		mesa.setJugadores(j1);
 		Jugador j2 = new Jugador();
@@ -78,4 +78,27 @@ public class MesaTest {
 		assertEquals(0,mesa.getJugadores().size());
 	}
 	
+	@Test
+	public void empezarAJugar21Test() throws Exception {
+		Repartidor repartidor = new Repartidor();
+		mesa.setRepartidor(repartidor);
+		Jugador j1 = new Jugador();
+		mesa.setJugadores(j1);
+		Jugador j2 = new Jugador();
+		mesa.setJugadores(j2);
+		Jugador j3 = new Jugador();
+		mesa.setJugadores(j3);
+		Jugador j4 = new Jugador();
+		mesa.setJugadores(j4);
+		
+		mesa.empezarAJugar21();
+		
+		assertEquals(44, repartidor.getNaipe().size());
+		assertEquals(2, j1.getMano().size());
+		assertEquals(2, j2.getMano().size());
+		assertEquals(2, j3.getMano().size());
+		assertEquals(2, j4.getMano().size());
+				
+	}
+ 	
 }

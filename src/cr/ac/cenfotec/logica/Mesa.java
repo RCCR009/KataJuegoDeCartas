@@ -36,4 +36,12 @@ public class Mesa {
 		}
 	}
 	
+	public void empezarAJugar21() {
+		for(int i = 0; i<2; i++) {
+			for(Jugador j: jugadores) {
+				repartidor.darCarta(j);
+			}
+		}
+	}
+	
 }
